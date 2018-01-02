@@ -21,8 +21,15 @@ changeVarType('const','let','requireVarType',(arrObjJSON)=>{
 });
 
 let newObjFile = new CodeFileDriver(__dirname+'/./inputfile.js');
-console.log(newObjFile);
+//console.log(newObjFile.requireLibList);
+
+console.log(newObjFile.requireLibList.length);
+newObjFile.changeLibWithLib('child_process','child_new_process');
+newObjFile.changeLibWithVarName('utilidad','utilities-libtwo');
 newObjFile.generateClonWithoutR();
+console.log(newObjFile.requireLibList);
+console.log(newObjFile.requireLibList.length);
+//newObjFile.requireLibList.forEach(element => console.log(element.requireVarName))
 //(searchVal,newVal,searchType,callback,afterArrObjJSON)
 //example
 //replace $2 and concatenate $1 + newStr + $3

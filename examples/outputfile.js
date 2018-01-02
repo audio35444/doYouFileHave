@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-const {getArgs} = require('./utilities/globalutilites.js');
-const child_process = require('child_process');
+const {getArgs,newArgs} = require('./utilities/globalutilites.js');
+const { utilidad } = require('utilities-libtwo');
+const child_process = require('child_new_process');
 const shell = require('shelljs');
 
 // let result = getArgs();

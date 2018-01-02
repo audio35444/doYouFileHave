@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const {getArgs} = require('./utilities/globalutilites.js');
+const {getArgs,newArgs} = require('./utilities/globalutilites.js');
+const {utilidad} = require('utildiadesvarias');
 const child_process = require('child_process');
 const shell = require('shelljs');
 
