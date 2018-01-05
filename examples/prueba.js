@@ -1,5 +1,7 @@
 const {readCodeFile,changeLibrery,changeVarName,changeVarType} = require('./regExpTester.js');
 const {CodeFileDriver} = require('./codefiledriver.js');
+const check = require('syntax-error');
+
 
 //using getter to arr Object JSON
 // readCodeFile((arrObjJSON)=>{
@@ -29,6 +31,8 @@ newObjFile.changeLibWithVarName('utilidad','utilities-libtwo');
 newObjFile.generateClonWithoutR();
 console.log(newObjFile.requireLibList);
 console.log(newObjFile.requireLibList.length);
+newObjFile.generateClonToFile();
+console.log(newObjFile.checkSyntaxStrFile());
 //newObjFile.requireLibList.forEach(element => console.log(element.requireVarName))
 //(searchVal,newVal,searchType,callback,afterArrObjJSON)
 //example

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const check = require('syntax-error');
 
 const CodeFileDriver = class CodeFileDriver{
   constructor(filePath){
@@ -53,7 +54,7 @@ const CodeFileDriver = class CodeFileDriver{
     let newStrFile = this.strFile.replace(/\r/g,'');
     fs.writeFileSync('./outputfile.js',newStrFile);
   }
-  generateClonToFile(clonFilePath='./clone'+this.fileName){
+  generateClonToFile(clonFilePath='./cl_'+this.fileName){
     this.clonFilePath = clonFilePath;
     fs.writeFileSync(this.clonFilePath,this.strFile);
   }
@@ -115,53 +116,16 @@ const CodeFileDriver = class CodeFileDriver{
     }
     thisRef._constructor();
   }
-  // changeLibrery(oldLib, newLib,callback,afterArrObjJSON) {
-  //   const replaceLib=(this.arrObjJSON)=>{
-  //     this.arrObjJSON.forEach(element=>{
-  //       if(element.requireLib===oldLib){
-  //         let regExpReplaceLib = new RegExp(this.regExpJSON.replacer.replaceLib);
-  //         let i=this.arrObjJSON.indexOf(element);
-  //         element.newFullStr = element.newFullStr?element.newFullStr.replace(regExpReplaceLib,(match,$1,$2,$3)=>$1+newLib+$3):element.fullStr.replace(regExpReplaceLib,(match,$1,$2,$3)=>$1+newLib+$3);
-  //         this.arrObjJSON[i] = element;
-  //       }
-  //     });
-  //     if(callback)callback(this.arrObjJSON);
-  //     else console.log(this.arrObjJSON);
-  //   };
-  //   if(afterArrObjJSON) replaceLib(afterArrObjJSON);
-  //   else readCodeFile(replaceLib);
-  // }
-  // loadArrObjJSON(){
-  //   jsonObj=JSON.parse(data);
-  //   let regExpRequire = new RegExp(jsonObj.searcher.require,'g');
-  //   let regExpRequireLib = new RegExp(jsonObj.searcher.requireLib);
-  //   let regExpRequireVarName = new RegExp(jsonObj.searcher.requireVarName);
-  //   let regExpRequireVarType = new RegExp(jsonObj.searcher.requireVarType);
-  //   let result = str.match(regExpRequire);
-  //   let arrObjJSON = [];
-  //
-  //   result.forEach((element) => {
-  //     let newElement={};
-  //     newElement.fullStr = element;
-  //     //return lib names
-  //     let requireLib = regExpRequireLib.exec(element);
-  //     if (requireLib) {
-  //       newElement.requireLib = requireLib[1];
-  //     }
-  //     //return var names
-  //     let requireVarName = regExpRequireVarName.exec(element);
-  //     if (requireVarName) {
-  //       newElement.requireVarName = requireVarName[1];
-  //     }
-  //     //return var type
-  //     let requireVarType = regExpRequireVarType.exec(element);
-  //     if (requireVarType) {
-  //       newElement.requireVarType = requireVarType[1];
-  //     }
-  //     arrObjJSON.push(newElement);
-  //   });
-  //   callback(arrObjJSON);
-  // }
+  // chequea si el archivo tiene errores hasta el momento y si es asi los muestra por pantalla
+  //para saber si los cambios lo dejaron en un estado compilable al archivo
+  checkSyntaxStrFile(){
+    var err = check(this.strFile);
+    if (err) {
+        console.error(err);
+        console.error(Array(76).join('-'));
+        return false;
+    }else{console.log('no errors');return true;}
+  }
 }
 
 module.exports.CodeFileDriver = CodeFileDriver;
